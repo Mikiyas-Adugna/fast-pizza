@@ -1,7 +1,6 @@
 const API_URL = "https://react-fast-pizza-api.onrender.com/api";
 
 export async function getMenu() {
-  console.log('yes');
   const res = await fetch(`${API_URL}/menu`);
 
   if (!res.ok) throw Error("Failed getting menu");
@@ -10,3 +9,5 @@ export async function getMenu() {
 
   return data;
 }
+
+

@@ -1,12 +1,13 @@
 <template>
-  <div>
-    <list :listOf="listOf" />
-  </div>
+  <ul class="space-y-4 mt-8" v-for="pizza in listOf">
+    <list :pizza="pizza" />
+  </ul>
 </template>
 
 <script>
 import { getMenu } from "../../service/AccessToApi";
 import list from "../../ui/list.vue";
+import { useDataStore } from "../../stores/dataStore";
 
 export default {
   name: "MenuPage",
@@ -14,13 +15,14 @@ export default {
     list,
   },
   async created() {
-    this.userName = this.$route.params.userName;
+    const userName = this.$route.params.userName;
+    const dataStore = useDataStore();
+    dataStore.userName(userName);
     await this.fetchMenu();
   },
- 
+
   data() {
     return {
-      userName: "",
       listOf: [],
     };
   },

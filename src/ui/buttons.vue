@@ -1,47 +1,41 @@
 <template>
   <div v-if="!soldOut" class="flex space-x-6 items-end justify-end">
-    <div v-if="!visibility" class="flex items-start">
+    <div v-if="dataStore.visibility()" class="flex items-start">
       <div class="flex items-center space-x-4">
         <btn :btnName="'-'" @click="decrement()" />
-        <p>{{ count }}</p>
+        <p>{{ dataS.quantity }}</p>
         <btn :btnName="'+'" @click="increment()" />
       </div>
     </div>
     <div>
-      <btn v-if="!visibility" :btnName="'Delete'" @click="Toggle()" />
-      <btn v-if="visibility" :btnName="'Add to cart'" @click="Toggle()" />
+      <btn
+        v-if="dataStore.visibility()"
+        :btnName="'Delete'"
+        @click="dataStore.deleteFromCart(id)"
+      />
+      <btn
+        v-if="!dataStore.visibility()"
+        :btnName="'Add to cart'"
+        @click="dataStore.addToCart(id)"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import { ref } from "vue";
 import btn from "../ui/Button.vue";
+import { useDataStore } from "@/stores/dataStore";
 export default {
   name: "buttons",
-  props: ["soldOut"],
   components: {
     btn,
   },
-  data() {
-    return {
-      visibility: true,
-      count: 1,
-    };
-  },
-  methods: {
-    Toggle() {
-      this.visibility = !this.visibility;
-    },
-    increment() {
-      this.count += 1;
-    },
-    decrement() {
-      this.count -= 1;
-      if (!this.count) {
-        this.Toggle();
-        this.count = 1;
-      }
-    },
+  props: ["soldOut", "id"],
+  setup() {
+    const dataStore = useDataStore();
+
+    return { dataStore };
   },
 };
 </script>

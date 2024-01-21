@@ -7,10 +7,15 @@
       <p class="text-lg font-semibold mt-4">
         Welcome! Please start by telling us your name :
       </p>
-      <input  class="border border-gray-900 outline-none px-3 py-2 text-gray-600 rounded-full mb-2 mt-2 " type="text" placeholder="Your full name" v-model.trim="userName" />
+      <input
+        class="border border-gray-900 outline-none px-3 py-2 text-gray-600 rounded-full mb-2 mt-2"
+        type="text"
+        placeholder="Your full name"
+        v-model.trim="user"
+      />
       <router-link
-        v-if="userName"
-        :to="{ name: 'menu', params: { userName: userName } }"
+        v-if="user"
+        :to="{ name: 'menu', params: { userName: user } }"
       >
         <div>
           <btn :btnName="'Start ordering'"></btn>
@@ -27,7 +32,8 @@ export default {
   name: "user",
   data() {
     return {
-      userName: "",
+      user: "",
+      // Store :  useDataStore(),
     };
   },
   components: {
