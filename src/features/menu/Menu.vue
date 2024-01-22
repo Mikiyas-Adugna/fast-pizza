@@ -1,7 +1,9 @@
 <template>
+  <div class="mb-16">
   <ul class="space-y-4 mt-8" v-for="pizza in listOf">
     <list :pizza="pizza" />
   </ul>
+    </div>
 </template>
 
 <script>

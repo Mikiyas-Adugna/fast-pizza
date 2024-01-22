@@ -1,14 +1,14 @@
 <template>
-  <div class="flex items-center justify-center h-64">
+  <div class="flex justify-center">
     <div class="text-center">
-      <h1 class="text-3xl font-bold text-yellow-400">
-        The best pizza. Straight out of the oven, straight to you.
+      <h1 class="text-4xl font-semibold text-yellow-500 max-w-3xl">
+        <p class="text-black">The best pizza.</p> Straight out of the oven, straight to you.
       </h1>
-      <p class="text-lg font-semibold mt-4">
+      <p class="text-xl mt-4">
         Welcome! Please start by telling us your name :
       </p>
       <input
-        class="border border-gray-900 outline-none px-3 py-2 text-gray-600 rounded-full mb-2 mt-2"
+        class="border border-gray-300 outline-yellow-400 px-3 py-2 text-gray-600 rounded-full mb-6 mt-8"
         type="text"
         placeholder="Your full name"
         v-model.trim="user"
@@ -27,13 +27,15 @@
 
 <script>
 import btn from "../../ui/Button.vue";
+import { useDataStore } from "@/stores/dataStore";
 
 export default {
   name: "user",
   data() {
+
     return {
       user: "",
-      // Store :  useDataStore(),
+      dataStore: useDataStore()
     };
   },
   components: {

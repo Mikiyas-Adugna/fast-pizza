@@ -1,5 +1,5 @@
 <template>
-    <li :key="id" class="flex justify-between max-w-screen-lg mx-auto ">
+    <li :key="id" class="flex justify-between max-w-screen-lg mx-auto pb-3 border-b border-gray-300">
       <div class="flex space-x-6">
         <img
           class="w-28 h-28 rounded-2xl"
@@ -60,6 +60,7 @@ export default {
       quantity: 1,
       unitPrice,
       totalPrice: unitPrice * 1,
+      ingredients
     };
     const dataStore = useDataStore();
     return {

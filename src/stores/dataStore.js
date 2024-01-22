@@ -4,11 +4,14 @@ export const useDataStore = defineStore("dataStore", {
   state: () => ({
     cart: [],
     user: "",
+    quantity: 0,
+    price: 0,
+    priority: false,
   }),
 
   actions: {
     userName(name) {
-      this.user = name;
+      this.user = name.toUpperCase();
     },
     increment(id) {
       const item = this.cart.find((pizza) => pizza.pizzaId == id);
@@ -22,9 +25,7 @@ export const useDataStore = defineStore("dataStore", {
       }
     },
     visibility(id) {
-      const arr = this.cart.find((pizza) => {
-        return pizza.pizzaId == id;
-      });
+      const arr = this.cart.find((pizza) => pizza.pizzaId == id);
       return arr;
     },
 
@@ -38,6 +39,29 @@ export const useDataStore = defineStore("dataStore", {
     currentQuantity(id) {
       const item = this.cart.find((pizza) => pizza.pizzaId == id);
       return item.quantity;
+    },
+    cleanCart() {
+      this.cart = [];
+    },
+    isPriority() {
+      this.priority = !this.priority;
+      return this.priority;
+    },
+  },
+  getters: {
+    pizzaQuantity() {
+      this.quantity = this.cart.reduce((acc, cur) => (acc += cur.quantity), 0);
+      return this.quantity;
+    },
+    pizzaPrice() {
+      this.price = this.cart.reduce(
+        (acc, cur) => (acc += cur.totalPrice * cur.quantity),
+        0
+      );
+      return this.price;
+    },
+    isCartEmpty() {
+      return this.cart.length > 0;
     },
   },
 });

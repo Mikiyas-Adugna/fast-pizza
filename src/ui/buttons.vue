@@ -1,10 +1,9 @@
 <template>
-  <div v-if="!soldOut" class="flex space-x-6 items-end justify-end">
     <div v-if="dataStore.visibility()" class="flex items-start">
       <div class="flex items-center space-x-4">
-        <btn :btnName="'-'" @click="decrement()" />
+        <btn :btnName="'-'" @click="decrement(id)" />
         <p>{{ dataS.quantity }}</p>
-        <btn :btnName="'+'" @click="increment()" />
+        <btn :btnName="'+'" @click="increment(id)" />
       </div>
     </div>
     <div>
@@ -13,13 +12,7 @@
         :btnName="'Delete'"
         @click="dataStore.deleteFromCart(id)"
       />
-      <btn
-        v-if="!dataStore.visibility()"
-        :btnName="'Add to cart'"
-        @click="dataStore.addToCart(id)"
-      />
     </div>
-  </div>
 </template>
 
 <script>
